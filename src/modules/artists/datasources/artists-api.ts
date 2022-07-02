@@ -6,8 +6,16 @@ export class ArtistsApi extends RESTDataSource {
     this.baseURL = 'http://localhost:3002/v1/'
   }
 
-  async getArtists () {
-    return this.get('artists')
+  async getArtists (limit: string, offset: string) {
+    if (limit && offset) {
+      return this.get(`artists?offset=${offset}&limit=${limit}`)
+    }
+    if (limit) {
+      return this.get(`artists?limit=${limit}`)
+    }
+    if (offset) {
+      return this.get(`artists?offset=${offset}`)
+    }
   }
 
   async getArtistById (id) {
