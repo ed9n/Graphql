@@ -16,9 +16,10 @@ export class ArtistsApi extends RESTDataSource {
     if (offset) {
       return this.get(`artists?offset=${offset}`)
     }
+    return this.get('artists')
   }
 
-  async getArtistById (id) {
+  async getArtistById (id: string) {
     return this.get(`artists/${id}`)
   }
 }
