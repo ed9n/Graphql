@@ -1,18 +1,19 @@
-import { gql } from 'apollo-server'
+import { gql } from 'apollo-server';
 
-export const band = gql`
-
-type Query {
-    bands: [Band]
-}
+export const Band = gql`
 
 type Band {
     id: ID!
     name: String
     origin: String
+    members: [Member]
     website: String
-    genres: String
+    genres: [Genre]
 }
 
+type Query {
+    bands(offset: Int, limit: Int): [Band]
+    band(id: ID!): Band
+}
 
-`
+`;
