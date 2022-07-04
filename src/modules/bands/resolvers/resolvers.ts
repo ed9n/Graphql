@@ -5,9 +5,24 @@ export const resBands = {
     bands: async (_, { limit, offset }, { dataSources }) => {
       return dataSources.bandsApi.getBands(limit, offset)
         .then((value: ObjectBand) => {
-          return value.items.map((el) => {
-            return { id: el._id, ...el };
+          return value.items.map((obj) => {
+            const id = obj.genresIds.toString();
+            const response = dataSources.genresApi.getGenreById(id);
+
+            const arr = [];
+            arr.push(response);
+
+            return {
+              id: obj._id,
+              ...obj,
+              genres: id ? arr.map((el) => {
+                return el.then((value) => {
+                  return { id: value._id, ...value };
+                });
+              }) : []
+            };
           });
+          
         });
     },
 

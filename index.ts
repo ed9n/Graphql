@@ -6,16 +6,20 @@ import { Band } from './src/modules/bands/schemas/band';
 import { resBands } from './src/modules/bands/resolvers/resolvers';
 import { BandsApi } from './src/modules/bands/datasources/bands-api';
 import { Member } from './src/modules/members/schemas/member';
+import { Genre } from './src/modules/genres/schemas/genre';
+import { resGenres } from './src/modules/genres/resolvers/resolvers';
+import { GenresApi } from './src/modules/genres/datasources/genres-api';
 
 const server = new ApolloServer({
-  typeDefs: [Artist, Band, Member],
-  resolvers: [resArtists, resBands],
+  typeDefs: [Artist, Band, Member, Genre],
+  resolvers: [resArtists, resBands, resGenres],
   csrfPrevention: true,
   cache: "bounded",
   dataSources: () => {
     return {
       artistsApi: new ArtistsApi(),
-      bandsApi: new BandsApi()
+      bandsApi: new BandsApi(),
+      genresApi: new GenresApi()
     };
   }
 
