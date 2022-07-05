@@ -1,4 +1,4 @@
-import { Genre, ObjectGenre } from '../interface/interface.artist';
+import { Genre, ObjectGenre } from '../interface/interface.genres';
 
 export const resGenres = {
   Query: {

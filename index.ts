@@ -9,17 +9,21 @@ import { Member } from './src/modules/members/schemas/member';
 import { Genre } from './src/modules/genres/schemas/genre';
 import { resGenres } from './src/modules/genres/resolvers/resolvers';
 import { GenresApi } from './src/modules/genres/datasources/genres-api';
+import { resAlbums } from './src/modules/albums/resolvers/resolvers';
+import { AlbumsApi } from './src/modules/albums/datasources/albums-api';
+import { Album } from './src/modules/albums/schemas/album';
 
 const server = new ApolloServer({
-  typeDefs: [Artist, Band, Member, Genre],
-  resolvers: [resArtists, resBands, resGenres],
+  typeDefs: [Artist, Band, Member, Genre, Album],
+  resolvers: [resArtists, resBands, resGenres, resAlbums],
   csrfPrevention: true,
   cache: "bounded",
   dataSources: () => {
     return {
       artistsApi: new ArtistsApi(),
       bandsApi: new BandsApi(),
-      genresApi: new GenresApi()
+      genresApi: new GenresApi(),
+      albumsApi: new AlbumsApi()
     };
   }
 
