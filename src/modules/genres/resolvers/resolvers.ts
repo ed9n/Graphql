@@ -18,5 +18,14 @@ export const resGenres = {
           return newObject;
         });
     }
+  },
+
+  Mutation: {
+    createGenre: async (_, { name, description, country, year }, { dataSources }) => {
+      return dataSources.genresApi.createGenre(name, description, country, year)
+        .then((value) => {
+          return { id: value._id, ...value };
+        });
+    }
   }
 };

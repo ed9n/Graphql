@@ -12,10 +12,19 @@ import { GenresApi } from './src/modules/genres/datasources/genres-api';
 import { resAlbums } from './src/modules/albums/resolvers/resolvers';
 import { AlbumsApi } from './src/modules/albums/datasources/albums-api';
 import { Album } from './src/modules/albums/schemas/album';
+import { User } from './src/modules/user/schemas/user';
+import { resUsers } from './src/modules/user/resolvers/resolvers';
+import { UserApi } from './src/modules/user/datasources/users-api';
+import { Favourite } from './src/modules/favourites/schemas/favourites';
+import { resFavourites } from './src/modules/favourites/resolvers/resolvers';
+import { FavouritesApi } from './src/modules/favourites/datasources/favourites-api';
+import { Track } from './src/modules/tracks/schemas/track';
+import { resTracks } from './src/modules/tracks/resolvers/resolvers';
+import { TracksApi } from './src/modules/tracks/datasources/tracks-api';
 
 const server = new ApolloServer({
-  typeDefs: [Artist, Band, Member, Genre, Album],
-  resolvers: [resArtists, resBands, resGenres, resAlbums],
+  typeDefs: [Artist, Band, Member, Genre, Album, User, Track ,Favourite],
+  resolvers: [resArtists, resBands, resGenres, resAlbums, resUsers, resFavourites, resTracks],
   csrfPrevention: true,
   cache: "bounded",
   dataSources: () => {
@@ -23,11 +32,25 @@ const server = new ApolloServer({
       artistsApi: new ArtistsApi(),
       bandsApi: new BandsApi(),
       genresApi: new GenresApi(),
-      albumsApi: new AlbumsApi()
+      albumsApi: new AlbumsApi(),
+      tracksApi: new TracksApi(),
+      userApi: new UserApi(),
+      favouriteApi: new FavouritesApi(),
+      
     };
-  }
+  },
+  context: async ({ req }) => {
 
+    const token = req.headers.authorization || '';
+
+    // console.log(`token: ${token}`)
+
+
+    return { token };
+  }
 });
+
+// });
 
 server.listen().then(() => {
   console.log(`

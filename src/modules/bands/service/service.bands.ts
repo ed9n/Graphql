@@ -14,3 +14,16 @@ export const getBands = (bands, genres) => {
 			});
 		});
 };
+
+export const getBandRespone = (arr, dataSources) => {
+
+	return arr.map((el) => {
+		const id = el.trim();
+		const response = dataSources.bandsApi.getBandById(id);
+
+		return Promise.all([response]).then((val) => {
+			return val;
+		});
+	});
+
+};

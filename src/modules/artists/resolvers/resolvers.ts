@@ -1,4 +1,5 @@
-import { getBands } from '../../bands/service/service.bands';
+import { getBandRespone, getBands } from '../../bands/service/service.bands';
+import { getGenreRespone } from '../../genres/service/service.genres';
 import { Artist, ObjectArtists } from '../interface/interface.artist';
 import { checkArrOnEmpty, getTrimForArr } from '../service/service.artists';
 
@@ -11,34 +12,19 @@ export const resArtists = {
         .then((value: ObjectArtists) => {
           return value.items.map((obj) => {
 
-            const bands = obj.bandsIds.map((el) => {
-              
-              const id = el.trim();
-              const response = dataSources.bandsApi.getBandById(id);
+            const bands = getBandRespone(obj.bandsIds, dataSources);
+            const arrBandsIds = getTrimForArr(obj.bandsIds);
 
-              return Promise.all([response]).then((val) => {
-                return val;
+            const genres = Promise.all(bands).then((el) => {
+              const upArr = el.flat();
+              return upArr.map((el) => {
+                return getGenreRespone(el.genresIds, dataSources);
               });
             });
 
-            const arrBandsIds = getTrimForArr(obj.bandsIds);
-
-              const genres = Promise.all(bands).then((el) => {
-                const upArr = el.flat();
-                return upArr.map((el) => {
-                  return el.genresIds.map((el) => {
-                    const id = el.trim();
-                    const response = dataSources.genresApi.getGenreById(id);
-
-                    return Promise.all([response]).then((val) => {
-                      return val;
-                    });
-                  });
-                });
-              });
-
             return {
-              id: obj._id, bands: checkArrOnEmpty(arrBandsIds) ?
+              id: obj._id, 
+              bands: checkArrOnEmpty(arrBandsIds) ?
                 getBands(bands, genres) :
                 [],
               ...obj
@@ -49,9 +35,25 @@ export const resArtists = {
 
     artist: async (_, { id }, { dataSources }) => {
       return dataSources.artistsApi.getArtistById(id)
-        .then((value: Artist) => {
-          const newObject = { id: value._id, ...value, instruments: value.instruments.join(', ') };
-          return newObject;
+        .then((obj: Artist) => {
+
+          const bands = getBandRespone(obj.bandsIds, dataSources);
+          const arrBandsIds = getTrimForArr(obj.bandsIds);
+
+          const genres = Promise.all(bands).then((el) => {
+            const upArr = el.flat();
+            return upArr.map((el) => {
+              return getGenreRespone(el.genresIds, dataSources);
+            });
+          });
+
+          return {
+            id: obj._id,
+            bands: checkArrOnEmpty(arrBandsIds) ?
+              getBands(bands, genres) :
+              [],
+            ...obj
+          };
         });
     }
   }

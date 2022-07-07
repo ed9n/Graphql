@@ -14,3 +14,16 @@ export const getGenres = (genres) => {
 			});
 		});
 };
+
+export const getGenreRespone = (arr, dataSources) => {
+
+	return arr.map((el) => {
+		const id = el.trim();
+		const response = dataSources.genresApi.getGenreById(id);
+
+		return Promise.all([response]).then((val) => {
+			return val;
+		});
+	});
+
+};

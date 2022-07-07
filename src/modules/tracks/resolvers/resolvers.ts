@@ -1,12 +1,12 @@
+import { getAlbumRespone, getAlbums } from '../../albums/service/service.albums';
 import { checkArrOnEmpty, getArtistRespone, getArtists, getTrimForArr } from '../../artists/service/service.artists';
 import { getBandRespone, getBands } from '../../bands/service/service.bands';
 import { getGenreRespone, getGenres } from '../../genres/service/service.genres';
-import { getTrackRespone, getTrakcs } from '../../tracks/service/service.tracks';
 
-export const resAlbums = {
+export const resTracks = {
   Query: {
-    albums: async (_, { limit, offset }, { dataSources }) => {
-      return dataSources.albumsApi.getAlbums(limit, offset)
+    tracks: async (_, { limit, offset }, { dataSources }) => {
+      return dataSources.tracksApi.getTracks(limit, offset)
         .then((value) => {
           return value.items.map((obj) => {
 
@@ -19,15 +19,13 @@ export const resAlbums = {
             const genres = getGenreRespone(obj.genresIds, dataSources);
             const arrGenresIds = getTrimForArr(obj.genresIds);
 
-            const tracks = getTrackRespone(obj.trackIds, dataSources);
-            const arrTracksIds = getTrimForArr(obj.trackIds);
+            const album = getAlbumRespone(obj.albumId, dataSources);
             
-            return   {
+
+            return {
               id: obj._id,
 
-              tracks: checkArrOnEmpty(arrTracksIds) ?
-              getTrakcs(tracks, artists, bands, genres) :
-              [],
+              album: getAlbums(album, artists, bands, genres),
 
               artists: checkArrOnEmpty(arrArtistsIds) ? 
               getArtists(artists, bands, genres) :
@@ -43,14 +41,14 @@ export const resAlbums = {
 
               ...obj
             };
+
           });
         });
     },
 
-    album: async (_, { id }, { dataSources }) => {
-      return dataSources.albumsApi.getAlbumById(id)
+    track: async (_, { id }, { dataSources }) => {
+      return dataSources.tracksApi.getTrack(id)
         .then((obj) => {
-
           const artists = getArtistRespone(obj.artistsIds, dataSources);
           const arrArtistsIds = getTrimForArr(obj.artistsIds);
 
@@ -60,14 +58,13 @@ export const resAlbums = {
           const genres = getGenreRespone(obj.genresIds, dataSources);
           const arrGenresIds = getTrimForArr(obj.genresIds);
 
-          const tracks = getTrackRespone(obj.tracksIds, dataSources);
-          const arrTracksIds = getTrimForArr(obj.tracksIds);
-            
-          return { 
+          const album = getAlbumRespone(obj.albumId, dataSources);
+
+
+          return {
             id: obj._id,
-            tracks: checkArrOnEmpty(arrTracksIds) ?
-              getTrakcs(tracks, artists, bands, genres) :
-              [],
+
+            album: getAlbums(album, artists, bands, genres),
 
             artists: checkArrOnEmpty(arrArtistsIds) ?
               getArtists(artists, bands, genres) :
@@ -80,7 +77,9 @@ export const resAlbums = {
             genres: checkArrOnEmpty(arrGenresIds) ?
               getGenres(genres) :
               [],
-            ...obj };
+
+            ...obj
+          };
         });
     }
   }
