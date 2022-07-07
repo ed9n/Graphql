@@ -56,6 +56,29 @@ export const resArtists = {
           };
         });
     }
+  },
+
+  Mutation: {
+    createArtist: async (_, { firstName, secondName, middleName, birthDate, birthPlace, country, bandsIds, instruments }, { dataSources }) => {
+      return dataSources.artistsApi.createArtist(firstName, secondName, middleName, birthDate, birthPlace, country, bandsIds, instruments)
+        .then((value) => {
+          return { id: value._id, ...value };
+        });
+    },
+
+    updateArtist: async (_, { id, firstName, secondName, middleName, birthDate, birthPlace, country, bandsIds, instruments }, { dataSources }) => {
+      return dataSources.artistsApi.updateArtist(id, firstName, secondName, middleName, birthDate, birthPlace, country, bandsIds, instruments)
+        .then((value) => {
+          return { id: value._id, ...value };
+        });
+    },
+
+    deleteArtist: async (_, { id }, { dataSources }) => {
+      return dataSources.artistsApi.deleteArtist(id)
+        .then((el) => {
+          return el;
+        });
+    },
   }
 
 };

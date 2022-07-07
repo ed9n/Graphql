@@ -37,4 +37,18 @@ export class GenresApi extends RESTDataSource {
     });
     return data;
   }
+
+  async deleteGenre(id) {
+    return await this.delete(`genres/${id}`);
+  }
+  
+  async updateGenre(id, name, description, country, year) {
+    const data = await this.put(`genres/${id}`, {
+      name,
+      description,
+      country,
+      year,
+    });
+    return data;
+  }
 }

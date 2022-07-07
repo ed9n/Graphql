@@ -26,6 +26,20 @@ export const resGenres = {
         .then((value) => {
           return { id: value._id, ...value };
         });
-    }
+    },
+
+    updateGenre: async (_, { id, name, description, country, year }, { dataSources }) => {
+      return dataSources.genresApi.updateGenre(id, name, description, country, year)
+        .then((value) => {
+          return { id: value._id, ...value };
+        });
+    },
+
+    deleteGenre: async (_, { id }, { dataSources }) => {
+      return dataSources.genresApi.deleteGenre(id)
+      .then((el) => { 
+        return el; 
+      });
+    },
   }
 };

@@ -11,6 +11,15 @@ type Band {
     genres: [Genre]
 }
 
+input BandInput {
+    id: ID!
+    name: String
+    origin: String
+    #members: [Member]
+    website: String
+    genres: [GenreInput]
+}
+
 type Query {
     bands(offset: Int, limit: Int): [Band]
     band(id: ID!): Band
