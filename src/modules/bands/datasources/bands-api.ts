@@ -3,7 +3,7 @@ import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest';
 export class BandsApi extends RESTDataSource {
   constructor () {
     super();
-    this.baseURL = 'http://localhost:3003/v1/';
+    this.baseURL = process.env.BANDS_URL;
   }
 
   willSendRequest(request: RequestOptions) {

@@ -3,7 +3,7 @@ import { RESTDataSource } from 'apollo-datasource-rest';
 export class UserApi extends RESTDataSource {
   constructor () {
     super();
-    this.baseURL = 'http://localhost:3004/v1/';
+    this.baseURL = process.env.USERS_URL;
   }
 
   async getJwt(email, password) {

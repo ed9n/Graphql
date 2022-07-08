@@ -3,7 +3,7 @@ import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest';
 export class TracksApi extends RESTDataSource {
   constructor () {
     super();
-    this.baseURL = 'http://localhost:3006/v1/';
+    this.baseURL = process.env.TRACKS_URL;
   }
 
   willSendRequest(request: RequestOptions) {

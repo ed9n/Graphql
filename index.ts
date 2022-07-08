@@ -21,6 +21,8 @@ import { FavouritesApi } from './src/modules/favourites/datasources/favourites-a
 import { Track } from './src/modules/tracks/schemas/track';
 import { resTracks } from './src/modules/tracks/resolvers/resolvers';
 import { TracksApi } from './src/modules/tracks/datasources/tracks-api';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 const server = new ApolloServer({
   typeDefs: [Artist, Band, Member, Genre, Album, User, Track ,Favourite],
@@ -43,57 +45,14 @@ const server = new ApolloServer({
 
     const token = req.headers.authorization || '';
 
-    // console.log(`token: ${token}`)
-
-
     return { token };
   }
 });
 
-// });
 
-server.listen().then(() => {
+server.listen(process.env.PORT).then(() => {
   console.log(`
     🚀  Server is running!
-    🔉  Listening on port 4000
+    🔉  Listening on port ${process.env.PORT}
   `);
 });
-
-// import { ApolloServer } from 'apollo-server-express';
-// import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
-// import express from 'express';
-// import http from 'http';
-// import { resol } from './src/modules/artists/resolvers/resolvers'
-// import { Artist } from './src/modules/artists/schemas/artist'
-// import { ArtistsApi } from './src/modules/artists/datasources/artists-api';
-
-// async function startApolloServer() {
-
-//     const app = express();
-//     const httpServer = http.createServer(app);
-
-//     const server = new ApolloServer({
-//         typeDefs: [Artist],
-//         resolvers: [resol],
-//         dataSources: () => {
-//             return {
-//                 artistsApi: new ArtistsApi(),
-//             }
-//         },
-//         csrfPrevention: true,
-//         cache: 'bounded',
-//         plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-//         introspection: true,
-//     });
-
-//     await server.start();
-//     server.applyMiddleware({
-//         app,
-//         path: '/'
-//     });
-
-//     await new Promise<void>(resolve => httpServer.listen({ port: 4000 }, resolve));
-//     console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
-// }
-
-// startApolloServer()

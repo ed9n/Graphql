@@ -3,11 +3,10 @@ import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest';
 export class FavouritesApi extends RESTDataSource {
   constructor () {
     super();
-    this.baseURL = 'http://localhost:3007/v1/';
+    this.baseURL = process.env.FAVOURITES_URL;
   }
 
   willSendRequest(request: RequestOptions) {
-    // console.log(this.context.token);
     return request.headers.set('Authorization', this.context.token);
   }
 

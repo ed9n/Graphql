@@ -3,7 +3,7 @@ import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest';
 export class GenresApi extends RESTDataSource {
   constructor () {
     super();
-    this.baseURL = 'http://localhost:3001/v1/';
+    this.baseURL = process.env.GANRES_URL;
   }
 
   willSendRequest(request: RequestOptions) {
