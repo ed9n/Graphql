@@ -15,8 +15,27 @@ type Query {
     favourites: Favourites 
 }
 
+type BandToFavourites {
+    bandsIds: [String]
+}
+
+type TrackToFavourites {
+    tracksIds: [String]
+}
+
+type ArtistToFavourites {
+    artistsIds: [String]
+}
+
+type GenreToFavourites {
+    genresIds: [String]
+}
+
 type Mutation {
-    addGenreToFavourites(type: String!, id: String! ): Favourites
+    addBandToFavourites(type: String!, id: String! ): BandToFavourites
+    addTrackToFavourites(type: String!, id: String! ): TrackToFavourites
+    addArtistToFavourites(type: String!, id: String! ): ArtistToFavourites
+    addGenreToFavourites(type: String!, id: String! ): GenreToFavourites
 }
 
 `;

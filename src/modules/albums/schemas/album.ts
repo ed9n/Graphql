@@ -18,4 +18,22 @@ type Query {
     album(id: ID!): Album
 }
 
+type CRUDAlbum {
+    id: ID!,
+    name: String,
+    released: Int,
+    artistsIds: [String],
+    bandsIds: [String],
+    trackIds: [String],
+    genresIds: [String],
+    image: String
+}
+
+
+type Mutation {
+    createAlbum( name: String, released: Int, artistsIds: [String], bandsIds: [String], trackIds: [String], genresIds: [String], image: String): CRUDAlbum
+    updateAlbum(id: ID!, name: String, released: Int, artistsIds: [String], bandsIds: [String], trackIds: [String], genresIds: [String], image: String): CRUDAlbum
+    deleteAlbum(id: ID!): Delete
+}
+
 `;

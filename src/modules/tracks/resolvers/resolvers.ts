@@ -82,5 +82,28 @@ export const resTracks = {
           };
         });
     }
+  },
+
+  Mutation: {
+    createTrack: async (_, { title, albumId, artistsIds, bandsIds, duration, released, genresIds }, { dataSources }) => {
+      return dataSources.tracksApi.createTrack(title, albumId, artistsIds, bandsIds, duration, released, genresIds)
+        .then((value) => {
+          return { id: value._id, ...value };
+        });
+    },
+
+    updateTrack: async (_, { id, title, albumId, artistsIds, bandsIds, duration, released, genresIds }, { dataSources }) => {
+      return dataSources.tracksApi.updateTrack(id, title, albumId, artistsIds, bandsIds, duration, released, genresIds)
+        .then((value) => {
+          return { id: value._id, ...value };
+        });
+    },
+
+    deleteTrack: async (_, { id }, { dataSources }) => {
+      return dataSources.tracksApi.deleteTrack(id)
+        .then((el) => {
+          return el;
+        });
+    },
   }
 };

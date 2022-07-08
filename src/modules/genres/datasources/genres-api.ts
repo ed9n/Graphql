@@ -7,7 +7,6 @@ export class GenresApi extends RESTDataSource {
   }
 
   willSendRequest(request: RequestOptions) {
-    // console.log(this.context.token);
     return request.headers.set('Authorization', this.context.token);
   }
 

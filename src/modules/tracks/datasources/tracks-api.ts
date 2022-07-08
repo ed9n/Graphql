@@ -1,9 +1,13 @@
-import { RESTDataSource } from 'apollo-datasource-rest';
+import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest';
 
 export class TracksApi extends RESTDataSource {
   constructor () {
     super();
     this.baseURL = 'http://localhost:3006/v1/';
+  }
+
+  willSendRequest(request: RequestOptions) {
+    return request.headers.set('Authorization', this.context.token);
   }
 
   async getTracks (limit: string, offset: string) {
@@ -21,5 +25,50 @@ export class TracksApi extends RESTDataSource {
 
   async getTrack (id: string) {
     return this.get(`tracks/${id}`);
+  }
+
+  async createTrack(
+    title: string,
+    albumId: string,
+    artistsIds: string[],
+    bandsIds: string[],
+    duration: number,
+    released: number,
+    genresIds: string[]) {
+    const data = await this.post(`tracks`, {
+      title,
+      albumId,
+      artistsIds,
+      bandsIds,
+      duration,
+      released,
+      genresIds
+    });
+    return data;
+  }
+
+  async deleteTrack(id) {
+    return await this.delete(`tracks/${id}`);
+  }
+
+  async updateTrack(
+    id: string,
+    title: string,
+    albumId: string,
+    artistsIds: string[],
+    bandsIds: string[],
+    duration: number,
+    released: number,
+    genresIds: string[]) {
+    const data = await this.put(`tracks/${id}`, {
+      title,
+      albumId,
+      artistsIds,
+      bandsIds,
+      duration,
+      released,
+      genresIds
+    });
+    return data;
   }
 }

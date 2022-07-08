@@ -19,4 +19,21 @@ type Query {
 
 }
 
+type CRUDTrack {
+    id: ID!,
+    title: String,
+    albumId: String,
+    artistsIds: [String],
+    bandsIds: [String],
+    duration: Int,
+    released: Int,
+    genresIds: [String]
+}
+
+type Mutation {
+    createTrack(title: String, albumId: String, artistsIds: [String], bandsIds: [String], duration: Int, released: Int, genresIds: [String]): CRUDTrack
+    updateTrack(id: ID!, title: String!, albumId: String, artistsIds: [String], bandsIds: [String], duration: Int, released: Int, genresIds: [String]): CRUDTrack
+    deleteTrack(id: ID!): Delete
+}
+
 `;

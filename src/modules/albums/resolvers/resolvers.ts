@@ -83,5 +83,28 @@ export const resAlbums = {
             ...obj };
         });
     }
+  },
+
+  Mutation: {
+    createAlbum: async (_, { name, released, artistsIds, bandsIds, trackIds, genresIds, image }, { dataSources }) => {
+      return dataSources.albumsApi.createAlbum(name, released, artistsIds, bandsIds, trackIds, genresIds, image)
+        .then((value) => {
+          return { id: value._id, ...value };
+        });
+    },
+
+    updateAlbum: async (_, { id, name, released, artistsIds, bandsIds, trackIds, genresIds, image }, { dataSources }) => {
+      return dataSources.albumsApi.updateAlbum(id, name, released, artistsIds, bandsIds, trackIds, genresIds, image)
+        .then((value) => {
+          return { id: value._id, ...value };
+        });
+    },
+
+    deleteAlbum: async (_, { id }, { dataSources }) => {
+      return dataSources.albumsApi.deleteAlbum(id)
+        .then((el) => {
+          return el;
+        });
+    },
   }
 };

@@ -37,6 +37,7 @@ export class ArtistsApi extends RESTDataSource {
     country: string,
     bandsIds: string[],
     instruments: string[]) {
+      
     const data = await this.post(`artists`, {
       firstName,
       secondName,

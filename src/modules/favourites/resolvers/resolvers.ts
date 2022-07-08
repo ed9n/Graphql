@@ -1,4 +1,4 @@
-import { getArtistRespone, getArtists, getTrimForArr } from '../../artists/service/service.artists';
+import { checkArrOnEmpty, getArtistRespone, getArtists, getTrimForArr } from '../../artists/service/service.artists';
 import { getBandRespone, getBands } from '../../bands/service/service.bands';
 import { getGenreRespone, getGenres } from '../../genres/service/service.genres';
 import { getTrackRespone, getTrakcs } from '../../tracks/service/service.tracks';
@@ -34,30 +34,20 @@ export const resFavourites = {
   },
 
   Mutation: {
+    addBandToFavourites: async (_, { type, id }, { dataSources }) => {
+      return dataSources.favouriteApi.addToFavourites(type, id);
+    },
+
+    addTrackToFavourites: async (_, { type, id }, { dataSources }) => {
+      return dataSources.favouriteApi.addToFavourites(type, id);
+    },
+
+    addArtistToFavourites: async (_, { type, id }, { dataSources }) => {
+      return dataSources.favouriteApi.addToFavourites(type, id);
+    },
+
     addGenreToFavourites: async (_, { type, id }, { dataSources }) => {
-      return dataSources.favouriteApi.addGenreToFavourites(type, id)
-      .then((obj) => {
-        const bands = obj.bandsIds.map((el) => {
-          const id = el.trim();
-          const response = dataSources.bandsApi.getBandById(id);
-
-          return Promise.all([response]).then((val) => {
-            return val;
-          });
-        });
-
-        const genres = obj.genresIds.map((el) => {
-          const id = el.trim();
-          const response = dataSources.genresApi.getGenreById(id);
-
-          return Promise.all([response]).then((val) => {
-            return val;
-          });
-        });
-
-        return {
-          id: obj._id, bands: getBands(bands, genres),  ...obj };
-      });
+      return dataSources.favouriteApi.addToFavourites(type, id);
     },
 
 

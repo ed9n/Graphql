@@ -15,7 +15,7 @@ export class FavouritesApi extends RESTDataSource {
     return this.get('favourites');
   }
 
-  async addGenreToFavourites(type , id) {
+  async addToFavourites(type , id) {
     const data = await this.put(`favourites/add`, {
       type,
       id

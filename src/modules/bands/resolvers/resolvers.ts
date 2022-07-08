@@ -45,5 +45,28 @@ export const resBands = {
           };
         });
     }
+  },
+
+  Mutation: {
+    createBand: async (_, { name, origin, membersId, website, genresIds }, { dataSources }) => {
+      return dataSources.bandsApi.createBand(name, origin, membersId, website, genresIds)
+        .then((value) => {
+          return { id: value._id, ...value };
+        });
+    },
+
+    updateBand: async (_, { id, name, origin, membersId, website, genresIds }, { dataSources }) => {
+      return dataSources.bandsApi.updateBand(id, name, origin, membersId, website, genresIds)
+        .then((value) => {
+          return { id: value._id, ...value };
+        });
+    },
+
+    deleteBand: async (_, { id }, { dataSources }) => {
+      return dataSources.bandsApi.deleteBand(id)
+        .then((el) => {
+          return el;
+        });
+    },
   }
 };
