@@ -15,6 +15,33 @@ export const getBands = (bands, genres) => {
 		});
 };
 
+export const getMembers = (member) => {
+
+	return Promise.all([member]).then((val) => {
+		return val.map((obj) => {
+			return obj.items.map((el) => {
+				const a = {id: el._id, ...el};
+				return a;
+			});
+		});
+	});
+};
+
+export const getMemberRespone = (arr, dataSources) => {
+
+	arr.map((el) => {
+		const id = el.artistId.trim();
+		const response = dataSources.artistsApi.getArtistById(id);
+
+		return Promise.all([response]).then((val) => {
+			return val;
+		});
+	});
+
+	
+
+};
+
 export const getBandRespone = (arr, dataSources) => {
 
 	return arr.map((el) => {

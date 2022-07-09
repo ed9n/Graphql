@@ -60,11 +60,12 @@ export const resAlbums = {
           const genres = getGenreRespone(obj.genresIds, dataSources);
           const arrGenresIds = getTrimForArr(obj.genresIds);
 
-          const tracks = getTrackRespone(obj.tracksIds, dataSources);
-          const arrTracksIds = getTrimForArr(obj.tracksIds);
-            
+          const tracks = getTrackRespone(obj.trackIds, dataSources);
+          const arrTracksIds = getTrimForArr(obj.trackIds);
+
           return { 
             id: obj._id,
+
             tracks: checkArrOnEmpty(arrTracksIds) ?
               getTrakcs(tracks, artists, bands, genres) :
               [],
@@ -80,7 +81,9 @@ export const resAlbums = {
             genres: checkArrOnEmpty(arrGenresIds) ?
               getGenres(genres) :
               [],
-            ...obj };
+              
+            ...obj 
+          };
         });
     }
   },

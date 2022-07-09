@@ -2,7 +2,7 @@ import { gql } from 'apollo-server';
 
 export const Artist = gql`
 
-type Artist {
+type Artist{
     id: ID!
     firstName: String
     secondName: String
@@ -11,17 +11,6 @@ type Artist {
     birthPlace: String
     country: String
     bands: [Band]
-    instruments: [String]
-}
-
-input ArtistInput{
-    firstName: String
-    secondName: String
-    middleName: String
-    birthDate: String
-    birthPlace: String
-    country: String
-    bands: [BandInput]
     instruments: [String]
 }
 

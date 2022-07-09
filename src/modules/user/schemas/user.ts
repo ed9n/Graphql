@@ -8,7 +8,7 @@ type JWT {
 type User {
     id: ID!
     firstName: String
-    secondName: String
+    lastName: String
     password: String
     email: String!
 }

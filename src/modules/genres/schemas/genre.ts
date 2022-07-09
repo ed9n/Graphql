@@ -15,12 +15,6 @@ type Delete {
     deletedCount: Int
 }
 
-input GenreInput {
-    name: String
-    description: String
-    country: String
-    year: Int
-}
 
 type Mutation {
     createGenre(name: String, description: String, country: String, year: Int): Genre

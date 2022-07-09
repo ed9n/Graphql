@@ -32,16 +32,17 @@ export class BandsApi extends RESTDataSource {
   async createBand(
     name: string,
     origin: string,
-    membersId: string[],
+    members,
     website: string,
     genresIds: string[]) {
     const data = await this.post(`bands`, {
       name,
       origin,
-      membersId,
+      members,
       website,
       genresIds
     });
+
     return data;
   }
 
@@ -50,11 +51,11 @@ export class BandsApi extends RESTDataSource {
   }
 
   async updateBand(
-    id, name, origin, membersId, website, genresIds) {
+    id, name, origin, members, website, genresIds) {
     const data = await this.put(`bands/${id}`, {
       name,
       origin,
-      membersId,
+      members,
       website,
       genresIds
     });

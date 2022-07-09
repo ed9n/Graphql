@@ -1,10 +1,8 @@
-import { Genre, ObjectGenre } from '../interface/interface.genres';
-
 export const resGenres = {
   Query: {
     genres: async (_, { limit, offset }, { dataSources }) => {
       return dataSources.genresApi.getGenres(limit, offset)
-        .then((value: ObjectGenre) => {
+        .then((value) => {
           return value.items.map((el) => {
             return { id: el._id, ...el };
           });
@@ -13,7 +11,7 @@ export const resGenres = {
 
     genre: async (_, { id }, { dataSources }) => {
       return dataSources.genresApi.getGenreById(id)
-        .then((value: Genre) => {
+        .then((value) => {
           const newObject = { id: value._id, ...value };
           return newObject;
         });

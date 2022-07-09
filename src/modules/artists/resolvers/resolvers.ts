@@ -1,6 +1,5 @@
 import { getBandRespone, getBands } from '../../bands/service/service.bands';
 import { getGenreRespone } from '../../genres/service/service.genres';
-import { Artist, ObjectArtists } from '../interface/interface.artist';
 import { checkArrOnEmpty, getTrimForArr } from '../service/service.artists';
 
 export const resArtists = {
@@ -9,7 +8,7 @@ export const resArtists = {
 
     artists: async (_, { limit, offset }, { dataSources }) => {
       return dataSources.artistsApi.getArtists(limit, offset)
-        .then((value: ObjectArtists) => {
+        .then((value) => {
           return value.items.map((obj) => {
 
             const bands = getBandRespone(obj.bandsIds, dataSources);
@@ -35,7 +34,7 @@ export const resArtists = {
 
     artist: async (_, { id }, { dataSources }) => {
       return dataSources.artistsApi.getArtistById(id)
-        .then((obj: Artist) => {
+        .then((obj) => {
 
           const bands = getBandRespone(obj.bandsIds, dataSources);
           const arrBandsIds = getTrimForArr(obj.bandsIds);

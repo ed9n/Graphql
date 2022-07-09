@@ -1,35 +1,35 @@
 import { checkArrOnEmpty, getTrimForArr } from '../../artists/service/service.artists';
 import { getGenreRespone, getGenres } from '../../genres/service/service.genres';
-import { Band, ObjectBand } from '../interface/interface.band';
 
 export const resBands = {
   Query: {
+    
     bands: async (_, { limit, offset }, { dataSources }) => {
       return dataSources.bandsApi.getBands(limit, offset)
-        .then((value: ObjectBand) => {
+              .then((value) => {
 
-          return value.items.map((obj) => {
+                return value.items.map((obj) => {
 
-            const genres = getGenreRespone(obj.genresIds, dataSources);
-            const arrGenresIds = getTrimForArr(obj.genresIds);
+                  const genres = getGenreRespone(obj.genresIds, dataSources);
+                  const arrGenresIds = getTrimForArr(obj.genresIds);
 
+                  return {
+                    id: obj._id,
 
-            return {
-              id: obj._id,
+                    genres: checkArrOnEmpty(arrGenresIds) ?
+                      getGenres(genres) :
+                      [],
 
-              genres: checkArrOnEmpty(arrGenresIds) ?
-                getGenres(genres) :
-                [],
+                    ...obj,
+                  };
 
-              ...obj,
-            };
-          });
-        });
+                });
+              });
     },
 
     band: async (_, { id }, { dataSources }) => {
       return dataSources.bandsApi.getBandById(id)
-        .then((obj: Band) => {
+        .then((obj) => {
 
           const genres = getGenreRespone(obj.genresIds, dataSources);
           const arrGenresIds = getTrimForArr(obj.genresIds);
@@ -48,15 +48,15 @@ export const resBands = {
   },
 
   Mutation: {
-    createBand: async (_, { name, origin, membersId, website, genresIds }, { dataSources }) => {
-      return dataSources.bandsApi.createBand(name, origin, membersId, website, genresIds)
+    createBand: async (_, { name, origin, members, website, genresIds }, { dataSources }) => {
+      return dataSources.bandsApi.createBand(name, origin, members, website, genresIds)
         .then((value) => {
           return { id: value._id, ...value };
         });
     },
 
-    updateBand: async (_, { id, name, origin, membersId, website, genresIds }, { dataSources }) => {
-      return dataSources.bandsApi.updateBand(id, name, origin, membersId, website, genresIds)
+    updateBand: async (_, { id, name, origin, members, website, genresIds }, { dataSources }) => {
+      return dataSources.bandsApi.updateBand(id, name, origin, members, website, genresIds)
         .then((value) => {
           return { id: value._id, ...value };
         });

@@ -5,7 +5,6 @@ import { ArtistsApi } from './src/modules/artists/datasources/artists-api';
 import { Band } from './src/modules/bands/schemas/band';
 import { resBands } from './src/modules/bands/resolvers/resolvers';
 import { BandsApi } from './src/modules/bands/datasources/bands-api';
-import { Member } from './src/modules/members/schemas/member';
 import { Genre } from './src/modules/genres/schemas/genre';
 import { resGenres } from './src/modules/genres/resolvers/resolvers';
 import { GenresApi } from './src/modules/genres/datasources/genres-api';
@@ -25,7 +24,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const server = new ApolloServer({
-  typeDefs: [Artist, Band, Member, Genre, Album, User, Track ,Favourite],
+  typeDefs: [Artist, Band, Genre, Album, User, Track ,Favourite],
   resolvers: [resArtists, resBands, resGenres, resAlbums, resUsers, resFavourites, resTracks],
   csrfPrevention: true,
   cache: "bounded",

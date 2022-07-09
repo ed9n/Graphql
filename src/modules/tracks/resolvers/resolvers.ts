@@ -2,6 +2,7 @@ import { getAlbumRespone, getAlbums } from '../../albums/service/service.albums'
 import { checkArrOnEmpty, getArtistRespone, getArtists, getTrimForArr } from '../../artists/service/service.artists';
 import { getBandRespone, getBands } from '../../bands/service/service.bands';
 import { getGenreRespone, getGenres } from '../../genres/service/service.genres';
+import { getTrackRespone } from '../service/service.tracks';
 
 export const resTracks = {
   Query: {
@@ -19,13 +20,16 @@ export const resTracks = {
             const genres = getGenreRespone(obj.genresIds, dataSources);
             const arrGenresIds = getTrimForArr(obj.genresIds);
 
+            const tracks = getTrackRespone([obj._id], dataSources);
+
             const album = getAlbumRespone(obj.albumId, dataSources);
+
             
 
             return {
               id: obj._id,
 
-              album: getAlbums(album, artists, bands, genres),
+              album: getAlbums(album, tracks, artists, bands, genres),
 
               artists: checkArrOnEmpty(arrArtistsIds) ? 
               getArtists(artists, bands, genres) :
@@ -60,11 +64,12 @@ export const resTracks = {
 
           const album = getAlbumRespone(obj.albumId, dataSources);
 
+          const tracks = getTrackRespone([obj._id], dataSources);
 
           return {
             id: obj._id,
 
-            album: getAlbums(album, artists, bands, genres),
+            album: getAlbums(album, tracks, artists, bands, genres),
 
             artists: checkArrOnEmpty(arrArtistsIds) ?
               getArtists(artists, bands, genres) :

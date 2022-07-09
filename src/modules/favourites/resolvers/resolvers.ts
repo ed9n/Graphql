@@ -23,10 +23,22 @@ export const resFavourites = {
 
         return { 
           id: obj._id, 
-          genres: getGenres(genres), 
-          artists: getArtists(artists, bands, genres ), 
-          bands: getBands(bands, genres), 
-          tracks: getTrakcs(tracks, artists, bands, genres),
+
+          tracks: checkArrOnEmpty(arrTracksIds) ?
+            getTrakcs(tracks, artists, bands, genres) :
+            [],
+
+          artists: checkArrOnEmpty(arrArtistsIds) ?
+            getArtists(artists, bands, genres) :
+            [],
+
+          bands: checkArrOnEmpty(arrBandsIds) ?
+            getBands(bands, genres) :
+            [],
+
+          genres: checkArrOnEmpty(arrGenresIds) ?
+            getGenres(genres) :
+            [],
           ...obj 
         };
       });
