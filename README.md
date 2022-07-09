@@ -35,10 +35,10 @@ Starting Graphql Service
 
 #  Mutations:
 
-* Artists
- - createArtist
- - deleteArtist
- - updateArtist
+* Artists:
+  createArtist
+  deleteArtist
+  updateArtist
 
 * Genres
  - createGenre
