@@ -1,11 +1,11 @@
 # Graphql Service
 
 # INSTRUCTIONS:
-Make sure that you have v16 LTS Node installed on your computer
-Clone or download this repo https://github.com/ed9n/Graphql
-Open your newly created folder with your code editor
-Checkout dev branch
-Using "npm i"
+* Make sure that you have v16 LTS Node installed on your computer
+* Clone or download this repo https://github.com/ed9n/Graphql
+* Open your newly created folder with your code editor
+* Checkout dev branch
+* Using "npm i"
 
 # How to use Graphql Service
 Starting Graphql Service
