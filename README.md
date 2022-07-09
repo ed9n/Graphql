@@ -40,30 +40,30 @@ Starting Graphql Service
  - deleteArtist
  - updateArtist
 
-* Genres
+* Genres:
  - createGenre
  - deleteGenre
  - updateGenre
 
-* Bands
+* Bands:
  - createBand
  - deleteBand
  - updateBand
 
-* Tracks
+* Tracks:
  - createTrack
  - deleteTrack
  - updateTrack
 
-* Albums
+* Albums:
  - createAlbum
  - deleteAlbum
  - updateAlbum
 
-* Users
+* Users:
  - register
 
-* Favourites
+* Favourites:
  - addTrackToFavourites
  - addBandToFavourites
  - addArtistToFavourites
