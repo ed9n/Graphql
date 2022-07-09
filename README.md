@@ -13,7 +13,7 @@ Starting Graphql Service
 2. The application is run in development mode: "npm run start:dev": start on "http://localhost:4000/"
 3. Need register user: Mutation -> register
 4. Need take JWT Token: Query -> jwt(add register data)
-5. Need add JWT Token in Headers: open Headers and add in left input: Authorization and right input: Bearer JWT Token
+5. Need add JWT Token in Headers: open Headers and add in Left Input: Authorization, Right Input: Bearer JWT Token
 
 # Implementation details
 
