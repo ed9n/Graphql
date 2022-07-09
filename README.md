@@ -33,29 +33,29 @@ Starting Graphql Service
 * user
 * favourites (available only for logged in user)
 
-#  Mutations(available only for logged in user):
+#  Mutations:
 
-* Artists:
+* Artists(available only for logged in user):
  - createArtist
  - deleteArtist
  - updateArtist
 
-* Genres:
+* Genres(available only for logged in user):
  - createGenre
  - deleteGenre
  - updateGenre
 
-* Bands:
+* Bands(available only for logged in user):
  - createBand
  - deleteBand
  - updateBand
 
-* Tracks:
+* Tracks(available only for logged in user):
  - createTrack
  - deleteTrack
  - updateTrack
 
-* Albums:
+* Albums(available only for logged in user):
  - createAlbum
  - deleteAlbum
  - updateAlbum
@@ -63,7 +63,7 @@ Starting Graphql Service
 * Users:
  - register
 
-* Favourites:
+* Favourites(available only for logged in user):
  - addTrackToFavourites
  - addBandToFavourites
  - addArtistToFavourites
