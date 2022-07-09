@@ -33,7 +33,7 @@ Starting Graphql Service
 * user
 * favourites (available only for logged in user)
 
-#  Mutations:
+#  Mutations(available only for logged in user):
 
 * Artists:
  - createArtist
