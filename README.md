@@ -64,7 +64,7 @@ Starting Graphql Service
 * Users:
  - register
 
-* Favourites(available only for logged in user):
+* Favourites(available only for logged in user. type it's: bands, tracks, artists, genres):
  - addTrackToFavourites
  - addBandToFavourites
  - addArtistToFavourites
