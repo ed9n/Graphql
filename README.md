@@ -6,7 +6,7 @@
 * Open your newly created folder with your code editor
 * Checkout dev branch
 * Using "npm i"
-* npm install -g ts-node
+* If you have Error('failed to start process, "ts-node" exec not found'), you should use:  npm install -g ts-node
 
 # How to use Graphql Service
 Starting Graphql Service
