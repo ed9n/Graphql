@@ -6,6 +6,7 @@
 * Open your newly created folder with your code editor
 * Checkout dev branch
 * Using "npm i"
+* npm install -g ts-node
 
 # How to use Graphql Service
 Starting Graphql Service
