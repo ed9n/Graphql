@@ -1,0 +1,45 @@
+{
+  "name": "graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start:dev": "nodemon ./index.ts",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ed9n/Graphql.git"
+  },
+  "author": "Eduard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ed9n/Graphql/issues"
+  },
+  "homepage": "https://github.com/ed9n/Graphql#readme",
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "apollo-datasource-rest": "^3.6.1",
+    "apollo-server": "^3.9.0",
+    "apollo-server-core": "^3.9.0",
+    "apollo-server-express": "^3.9.0",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "graphql": "^16.5.0"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.4.5",
+    "@types/nodemon": "^1.19.1",
+    "@typescript-eslint/eslint-plugin": "^5.30.3",
+    "@typescript-eslint/parser": "^5.30.3",
+    "eslint": "^8.19.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.3",
+    "eslint-plugin-promise": "^6.0.0",
+    "nodemon": "^2.0.18",
+    "typescript": "^4.7.4"
+  }
+}
